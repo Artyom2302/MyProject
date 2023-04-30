@@ -1,0 +1,43 @@
+<div  class="wrapper">
+  <div *ngIf="showLoginBlock; else registration" class="form-box login" >
+    <h2>Login</h2>
+    <form [formGroup]="formLogin">
+      <div class="input-box">
+        <input type="text" required formControlName="login">
+        <label>Login</label>
+      </div>
+      <div class="input-box">
+        <input type="password" required  formControlName="password">
+        <label>Password</label>
+      </div>
+    </form>
+    <button type="submit" class="btn" (click)="submitLogin()">Login</button>
+    <div class="login-register">
+      <p>Don't have account?<a (click)="showLoginBlock=!showLoginBlock">Register</a></p>
+    </div>
+  </div>
+  <ng-template #registration>
+    <div class="form-box registration">
+      <h2>Registration</h2>
+      <form [formGroup]="formRegister">
+        <div class="input-box">
+          <input type="text" required formControlName="login">
+          <label>Login</label>
+        </div>
+        <div class="input-box" >
+          <input type="password" required formControlName="password">
+          <label>Password</label>
+        </div>
+        <div class="input-box">
+          <input type="password" required formControlName="passwordAgain">
+          <label>Enter password again</label>
+        </div>
+      </form>
+      <label class="checkbox-agree"><input type="checkbox" name="" id="" [(ngModel)]="aggrement">I agree with the statement</label>
+      <button type="submit" class="btn" (click)="submitRegister()">Register</button>
+      <div class="login-register">
+        <p >Already have account?<a (click)="showLoginBlock=!showLoginBlock">Login</a></p>
+      </div>
+    </div>
+  </ng-template>
+</div>

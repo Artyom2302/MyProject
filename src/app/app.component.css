@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+  font-family: 'Poppins',sans-serif;
+}
+body{
+  background: #bbbbbb;
+  background-size: cover ;
+}
+.unauthorized{
+  padding-top: 250px;
+  display: flex;
+  justify-content: center;
+  align-items:stretch ;
+
+}
+
+

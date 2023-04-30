@@ -1,0 +1,12 @@
+<div class="orders">
+  <header>
+    <h1>Заказы</h1>
+    <button class="btn">Создать заказ</button>
+  </header>
+  <div class="content">
+        <app-lab *ngFor="let item of Labs" [lab]="item" (DeleteLab)="DeleteLab($event)"></app-lab>
+  </div>
+</div>
+
+
+

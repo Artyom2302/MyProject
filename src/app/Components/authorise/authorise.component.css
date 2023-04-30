@@ -1,0 +1,89 @@
+.wrapper{
+  position: relative;
+  width: 400px;
+  height: 440px;
+  background: transparent;
+  border: 4px solid rgb(10, 10, 10);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0,0,0,.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper .form-box{
+  width: 100%;
+  padding: 40px;
+  text-align: center;
+}
+
+.form-box h2{
+  font-size: 2em;
+}
+.input-box{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom:2px solid black ;
+  margin: 30px 0;
+
+}
+.input-box label{
+  position: absolute;
+  top:50%;
+  left:5px;
+  transform:translateY(-50%);
+  font-size: 1em;
+  color:black;
+  font-weight: 500;
+  pointer-events: none;
+  transition: .5s;
+}
+.input-box input{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  padding-left: 2px;
+}
+.input-box input:focus~label,
+.input-box input:valid~label{
+  top: -15px;
+}
+.btn{
+  width: 80%;
+  height: 45px;
+  border-radius: 20px;
+  background-color: whitesmoke;
+  font-size: 1.5em;
+  transition: 0.5s;
+}
+.btn:hover{
+  width: 90%;
+  border-radius: 10px;
+  background-color: #f6f6f6;
+}
+.login-register{
+  font-size: 1.5em;
+  color: #0a0a0a;
+  text-align: center;
+  font-weight: 500;
+  margin: 25px 0 10px;
+  text-decoration: none;
+}
+
+.login-register p a{
+  text-decoration: none;
+  font-weight: 500;
+}
+.login-register p a:hover{
+  text-decoration: underline;
+}
+.checkbox-agree{
+  margin: -15px 0 15px;
+  display: flex;
+}
+
+.wrapper .form-box.registration{
+  position: absolute;
+}
