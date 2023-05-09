@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {AuthoriseService} from "../../../services/authorise.service";
 
-export type user={login:"",password:""};
+export type user={id:0,login:"",password:""};
 @Component({
   selector: 'app-authorise',
   templateUrl: './authorise.component.html',
@@ -15,7 +15,7 @@ export class AuthoriseComponent {
   showLoginBlock:boolean=true;
   aggrement:boolean=false;
   responce:any;
-  @Output() loginUser = new EventEmitter<user>();
+  @Output() loginUser = new EventEmitter<any>();
   formLogin: FormGroup = new FormGroup({
     login: new FormControl(''),
     password: new FormControl('')
@@ -35,15 +35,15 @@ export class AuthoriseComponent {
 
   async submitLogin() {
     let loginServer = await this.loginServer();
-    if (loginServer=="Not found"){
+    if (loginServer==-1){
       alert("User does not exist, create account");
     }
-    else if(loginServer=="Wrong password") {
+    else if(loginServer==0) {
       alert("Wrong password, try again");
     }
     else {
-      this.loginUser.emit(this.formLogin.value);
-      console.log(this.formLogin.value);
+      this.loginUser.emit(loginServer);
+      console.log(loginServer);
     }
   }
 

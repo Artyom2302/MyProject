@@ -2,7 +2,7 @@
       <div class="unauthorized" *ngIf="!authorise">
         <app-authorise (loginUser)="logUser($event)"></app-authorise>
       </div>
-      <app-mainpage *ngIf="authorise"></app-mainpage>
+      <app-mainpage [Login]="login" [id]="id" *ngIf="authorise"></app-mainpage>
 </body>
 
 

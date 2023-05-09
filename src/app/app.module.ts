@@ -19,6 +19,7 @@ import { MainpageComponent } from './Components/mainpage/mainpage.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { AddLabComponent } from './Components/labs/add-lab/add-lab.component';
 
 const appRoutes: Routes =[
   { path: 'login', component: AuthoriseComponent},
@@ -33,7 +34,8 @@ const appRoutes: Routes =[
     AboutComponent,
     LabsComponent,
     LabComponent,
-    MainpageComponent
+    MainpageComponent,
+    AddLabComponent
   ],
   imports: [
     BrowserModule,

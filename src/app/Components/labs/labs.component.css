@@ -18,11 +18,13 @@ header{
  justify-content: center;
 }
 .orders{
-  flex-direction: column;
+  display: flex;
+  padding: 20px;
 }
 .content{
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  padding-left: 3em;
+  position: static;
+
+
 }

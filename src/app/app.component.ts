@@ -10,8 +10,10 @@ import {user} from "./Components/authorise/authorise.component";
 export class AppComponent {
   title = 'MyProject';
   authorise:boolean=true;
-  login:string="";
-  logUser(user: user) {
+  id:number=1;
+  login:string="user1";
+  logUser(user:any) {
+    this.id=user.id;
     this.login=user.login;
     this.authorise=true;
   }

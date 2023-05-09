@@ -3,6 +3,10 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {lastValueFrom} from "rxjs";
 import {URL_USER} from "../app/common/url";
 
+
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,18 +14,20 @@ export class AuthoriseService {
 
   constructor(private http :HttpClient) { }
 
-  async Authorise(login:string, password:string):Promise<string> {
+  async Authorise(login:string, password:string):Promise<any> {
     let response = await lastValueFrom(this.http.get<any>(URL_USER+"/ShowUserByLogin?login="+login)).catch((_:any) => null);
     if (response==null){
-      return "Not found";
+      return -1;
     }
     else if(response.password!=password){
-      return "Wrong password";
+      return 0;
     }
     else{
-      return "Authorise";
+      return response;
     }
   }
+
+
 
   async Register(login:string,password:string) {
     console.log(login);
@@ -31,11 +37,16 @@ export class AuthoriseService {
     let resp =  await lastValueFrom( this.http.post(URL_USER, {
       "login": login,
       "password": password
-    }));
-    console.log(resp);
+    })).then(r=>console.log(r));
 
   }
-
-
+   AddUserLab(userId:number,labName:string,mainStack:string):Promise<any>{
+    let url=URL_USER+"/PutUserLab?id="+userId;
+    let body={
+      "name": labName,
+      "main_stack": mainStack
+    }
+    return lastValueFrom(this.http.put<any>(url, body));
+  }
 
 }
