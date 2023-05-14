@@ -7,6 +7,7 @@ import {URL_USER} from "../app/common/url";
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,13 +41,13 @@ export class AuthoriseService {
     })).then(r=>console.log(r));
 
   }
-   AddUserLab(userId:number,labName:string,mainStack:string):Promise<any>{
+   async AddUserLab(userId:number,labName:string,mainStack:string){
     let url=URL_USER+"/PutUserLab?id="+userId;
     let body={
       "name": labName,
       "main_stack": mainStack
     }
-    return lastValueFrom(this.http.put<any>(url, body));
+    return await lastValueFrom(this.http.put<any>(url, body)).then(r=>"Not Exist").catch(r=>"Exist");
   }
 
 }

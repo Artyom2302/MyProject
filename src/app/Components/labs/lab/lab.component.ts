@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {MatDialog} from "@angular/material/dialog";
+import {AddReviewFormComponent} from "../../Forms/add-review-form/add-review-form.component";
+import {AddLabFormComponent} from "../../Forms/add-lab-form/add-lab-form.component";
 
 
 export interface Lab{
@@ -27,15 +30,21 @@ export interface Review{
   styleUrls: ['./lab.component.css']
 })
 export class LabComponent {
+
     @Input() lab!:Lab;
+    @Input() isCard!:boolean;
     @Output()
     DeleteLab=new EventEmitter();
+    @Output()
+    ChangeLabState=new EventEmitter();
     @Output()
     SendReview=new EventEmitter();
 
     @Output()
     DeleteReview=new EventEmitter();
 
+  constructor(private dialog:MatDialog) {
+  }
   ReviewForm: FormGroup = new FormGroup({
     "ReviewText": new FormControl(""),
     "Score": new FormControl(5),
@@ -44,33 +53,26 @@ export class LabComponent {
       this.lab.review.reviewText="";
       this.lab.review.score=0;
       this.DeleteReview.emit(this.lab.id);
-
     };
 
-  onDeleteLab(){
 
+  onDeleteLab(){
     this.DeleteLab.emit(this.lab.id);
   };
     OnLeaveReview(){
-      if (this.ReviewForm.get("Score")!.value>5 || this.ReviewForm.get("Score")!.value<1){
-        alert('Enter value between 1 and 5');
-        return;
-      }
-      else {
-          let rev:any= {
-            labId: this.lab.id,
-            text: this.ReviewForm.get("ReviewText")!.value,
-            score: this.ReviewForm.get("Score")!.value
-          }
-          this.SendReview.emit(rev);
-          this.lab.review.reviewText=rev.text;
-          this.lab.review.score=rev.score;
-          }
+      const dialofRef=this.dialog.open(AddReviewFormComponent,{
+      });
+      dialofRef.afterClosed().subscribe(result=>{
+        const data={labId:this.lab.id,text:result.text,score:result.score}
+        this.SendReview.emit(data);
+      })
+
+    }
+  onDoneChange(){
+    this.ChangeLabState.emit(this.lab.id);
+  }
 
 
-
-      }
-
-
-
+  protected readonly blur = blur;
+  protected readonly name = name;
 }

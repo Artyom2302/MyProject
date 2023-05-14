@@ -16,15 +16,38 @@
 header{
   display: flex;
  justify-content: center;
+  align-items: center;
 }
+header h1{
+  margin: 0;
+}
+header mat-form-field{
+  align-items: center;
+  justify-items: center;
+}
+
 .orders{
   display: flex;
   padding: 20px;
+  height: 500px;
 }
-.content{
+.content-card{
   display: flex;
   flex-direction: row;
-  position: static;
-
-
+  gap: 20px;
 }
+.content-table{
+  gap:20px;
+  display: flex;
+  flex-direction: column;
+}
+.content-table td{
+  width: 150px;
+  padding-left: 10px;
+}
+
+.snackbar {
+  background-color: beige;
+  color: black;
+}
+

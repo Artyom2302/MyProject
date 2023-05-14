@@ -20,6 +20,15 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { AddLabComponent } from './Components/labs/add-lab/add-lab.component';
+import { AddLabFormComponent } from './Components/Forms/add-lab-form/add-lab-form.component';
+import { AddReviewFormComponent } from './Components/Forms/add-review-form/add-review-form.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {MatRippleModule} from "@angular/material/core";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatTableModule} from "@angular/material/table";
+import {MatSelectModule} from "@angular/material/select";
+import {MatListModule} from "@angular/material/list";
 
 const appRoutes: Routes =[
   { path: 'login', component: AuthoriseComponent},
@@ -35,7 +44,9 @@ const appRoutes: Routes =[
     LabsComponent,
     LabComponent,
     MainpageComponent,
-    AddLabComponent
+    AddLabComponent,
+    AddLabFormComponent,
+    AddReviewFormComponent
   ],
   imports: [
     BrowserModule,
@@ -43,10 +54,14 @@ const appRoutes: Routes =[
     BrowserAnimationsModule,
     MatInputModule,
     MatIconModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatSelectModule,
     IonicModule.forRoot(),
-    BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule, MatCardModule, MatButtonModule, MatCheckboxModule]
+    BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule, MatCardModule, MatButtonModule, MatCheckboxModule, MatRippleModule, MatSlideToggleModule, MatTableModule, MatSelectModule, MatListModule]
   ,
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

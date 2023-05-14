@@ -1,30 +1,49 @@
 
-  <div class="lab-container">
+  <div class="lab-container" *ngIf="isCard; else MainElse" >
 
       <mat-card-title>Lab {{lab.name}}:</mat-card-title>
       <p>Main stack:{{lab.main_stack}} </p>
-      <p>Date : {{lab.date}}</p>
-      <p>{{lab.isDone?"Done":"Not done"}} <mat-checkbox class="example-margin" [(ngModel)]="lab.isDone"></mat-checkbox></p>
+      <p>Date : {{ lab.date | date: 'dd/MM/yyyy hh:mm:ss a' }}</p>
+      <p>{{lab.isDone?"Done":"Not done"}} <mat-checkbox class="example-margin" [(ngModel)]="lab.isDone" (change)="onDoneChange() ; blur()"></mat-checkbox></p>
       <p *ngIf='lab.review.reviewText=="";else elseBlock' class="form-review">
-
-        <mat-form-field appearance="fill" [formGroup]="ReviewForm">
-          <mat-label>Leave your review here</mat-label>
-          <textarea matInput formControlName="ReviewText" ></textarea>
-        </mat-form-field>
-        <mat-form-field appearance="fill" [formGroup]="ReviewForm">
-          <mat-label>Leave your score here</mat-label>
-          <input matInput formControlName="Score" >
-        </mat-form-field>
-        <button mat-button color="primary" (click)="OnLeaveReview()">Leave review</button>
+        <button mat-button color="basic" (click)="OnLeaveReview()">Leave review</button>
       </p>
       <ng-template #elseBlock>
         <p>Review: {{this.lab.review.reviewText}}</p>
         <p>Score: {{this.lab.review.score}}</p>
-        <p><button mat-button color="warn" (click)="onDeleteReview()">Delete review</button></p>
+        <p class="form-review"><button mat-button color="warn" (click)="onDeleteReview()">Delete review</button></p>
       </ng-template>
-      <p><button mat-button color="warn" (click)="onDeleteLab()">Delete lab</button></p>
+      <p class="form-review"><button mat-button color="warn" (click)="onDeleteLab()">Delete lab</button></p>
 
   </div>
+  <ng-template #MainElse >
+
+    <tr class="lab-container-table">
+      <td>{{lab.name}}</td>
+      <td>{{lab.main_stack}}</td>
+      <td>{{ lab.date | date: 'dd/MM/yyyy hh:mm:ss a' }}</td>
+      <td>{{lab.isDone?"Done":"Not done"}} <mat-checkbox class="example-margin" [(ngModel)]="lab.isDone" (change)="onDoneChange() ; blur()"></mat-checkbox></td>
+
+      <td class="tdReview" >
+            <p>{{this.lab.review.reviewText==""?"--":this.lab.review.reviewText}}</p>
+           <p>{{this.lab.review.score==0?"--":this.lab.review.score}}</p>
+      </td>
+      <td><p class="form-review" *ngIf="lab.review.reviewText=='' else DeleteReviewBlock" >
+        <button mat-button color="basic" (click)="OnLeaveReview()">Leave review</button>
+      </p>
+        <ng-template #DeleteReviewBlock>
+          <p class="form-review"><button mat-button color="warn" (click)="onDeleteReview()">Delete review</button></p>
+        </ng-template>
+      </td>
+
+      <td><p class="form-review"><button mat-button color="warn" (click)="onDeleteLab()">Delete lab</button></p></td>
+
+
+
+    </tr>
+    <mat-divider></mat-divider>
+  </ng-template>
+
 
 
 

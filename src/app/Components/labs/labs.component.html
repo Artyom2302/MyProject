@@ -1,15 +1,48 @@
 
   <header>
     <h1>Заказы</h1>
+    <mat-slide-toggle color="primary" [(ngModel)]="isCard" >Cards</mat-slide-toggle>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Order Option </mat-label>
+      <mat-select [(value)]="OrderOption">
+        <mat-option>None</mat-option>
+        <mat-option value="name" (click)="Sort(OrderOption,OrderDir)">By Name</mat-option>
+        <mat-option value="date" (click)="Sort(OrderOption,OrderDir)">By Date</mat-option>
+        <mat-option value="mainStack" (click)="Sort(OrderOption,OrderDir)">By Main Stack</mat-option>
+        <mat-option value="reviewText" (click)="Sort(OrderOption,OrderDir)">By Review</mat-option>
+        <mat-option value="score" (click)="Sort(OrderOption,OrderDir)">By Score</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-icon-button color="basic" (click)="OrderDir=!OrderDir;Sort(OrderOption,OrderDir)">
+      <mat-icon >swap_vert</mat-icon>
+    </button>
+
+
+
   </header>
   <div class="orders">
-  <div class="content">
-    <app-lab *ngFor="let item of Labs" [lab]="item" (DeleteLab)="DeleteLab($event)" (DeleteReview)="DeleteReview($event)"  (SendReview)="SendReview($event)"></app-lab>
+      <table *ngIf="!isCard"  class="content-table">
+        <tr>
+          <td>Name:</td>
+          <td>Main Stack:</td>
+          <td>Date:</td>
+          <td>Is done:</td>
+          <td>Review:</td>
+          <td>Score:</td>
+        </tr>
+        <app-lab *ngFor="let item of Labs" [lab]="item" [isCard]="isCard" (DeleteLab)="DeleteLab($event)" (ChangeLabState)="ChangeState($event)" (DeleteReview)="DeleteReview($event)"  (SendReview)="SendReview($event)"></app-lab>
+        <app-add-lab (Add)="OnAddLab()" [isCard]="isCard"></app-add-lab>
+      </table>
+
+      <div *ngIf="isCard" class="content-card">
+        <app-lab *ngFor="let item of Labs" [lab]="item" [isCard]="isCard" (DeleteLab)="DeleteLab($event)" (ChangeLabState)="ChangeState($event)" (DeleteReview)="DeleteReview($event)"  (SendReview)="SendReview($event)"></app-lab>
+        <app-add-lab (Add)="OnAddLab()" [isCard]="isCard"></app-add-lab>
+      </div>
+
+
   </div>
-  <div class="content">
-    <app-add-lab (Add)="OnAddLab($event)"></app-add-lab>
-  </div>
-</div>
+
 
 
 

@@ -29,6 +29,7 @@ export class LabsService {
     console.log(resp);
   }
   async postReview(LabId:number,review:string,score:number):Promise<void>{
+    console.log(LabId);
     let url=URL_LABS + "/PutLabReview?id=" + LabId;
     let resp =await lastValueFrom(this.http.put(url, {
       "score": score,
@@ -43,5 +44,11 @@ export class LabsService {
     console.log(resp);
     return resp;
   }
+  async ChangeLabState(id:number){
+    let url=URL_LABS + "/ChangeLabState?id=" + id;
+    let resp=await lastValueFrom(this.http.put(url,{}));
+    console.log(resp);
+  }
+
 }
 
