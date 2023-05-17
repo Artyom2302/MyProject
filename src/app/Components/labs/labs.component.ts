@@ -45,19 +45,33 @@ export class LabsComponent {
   }
   Sort(propvalue:string,dir=false){
     let prop:keyof Lab;
-    if (propvalue == "reviewText" || propvalue == "score") {
-      prop = ("review."+propvalue) as keyof Lab;
-    } else {
-      prop = propvalue as keyof Lab;
-    }
-    console.log(prop);
+
+    prop = propvalue as keyof Lab;
+
     this.Labs=this.Labs.sort(function(a,b){
       console.log(a.review);
       console.log(b.review);
       let dirIf=a[prop]<b[prop] ;
+      if (propvalue == "reviewText"){
+        dirIf=a.review.reviewText<b.review.reviewText;
+      }
+      else if (propvalue == "score"){
+        dirIf=a.review.score<b.review.score;
+      }
+
       if (dir){
         dirIf=a[prop]>b[prop];
+        if (propvalue == "reviewText"){
+          dirIf=a.review.reviewText>b.review.reviewText;
+        }
+        else if (propvalue == "score"){
+          dirIf=a.review.score>b.review.score;
+        }
+
+
       }
+
+
       if (dirIf){
         return -1;
       }
