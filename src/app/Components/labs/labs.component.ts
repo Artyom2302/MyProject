@@ -5,6 +5,7 @@ import {AuthoriseService} from "../../../services/authorise.service";
 import {AddLabFormComponent} from "../Forms/add-lab-form/add-lab-form.component";
 import {MatDialog,MatDialogRef,MatDialogModule} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ActivatedRoute} from "@angular/router";
 
 
 
@@ -14,13 +15,21 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./labs.component.css']
 })
 export class LabsComponent {
-  constructor(private labService:LabsService,private userServise:AuthoriseService,private dialog:MatDialog,private snackBar: MatSnackBar) {
+  constructor(private route: ActivatedRoute,private labService:LabsService,private userServise:AuthoriseService,private dialog:MatDialog,private snackBar: MatSnackBar) {
   }
   async ngOnInit() {
-   this.Labs = await this.labService.GetLabs(this.userid);
+
+    this.route.params.subscribe(async params => {
+      console.log(params['id'])
+      this.userid = params['id'];
+      this.Labs = await this.labService.GetLabs(this.userid);
+    });
+
+
+
   }
 
-  userid:number=1;
+  userid:number=0;
   public Labs:Lab[]=[
   ];
   isCard:boolean=false;

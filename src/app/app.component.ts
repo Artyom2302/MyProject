@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, Output} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {user} from "./Components/authorise/authorise.component";
+import {compass, logIn} from "ionicons/icons";
+import {HTTPInterceptorService} from "../services/httpinterceptor.service";
+import {TokenService} from "../services/token.service";
 
 @Component({
   selector: 'app-root',
@@ -9,12 +12,17 @@ import {user} from "./Components/authorise/authorise.component";
 })
 export class AppComponent {
   title = 'MyProject';
-  authorise:boolean=true;
-  id:number=1;
-  login:string="user1";
+  authorise:boolean=false;
+  id:number=0;
+  login:string="";
+  token:string="";
+  constructor(private tokenService :TokenService) {
+  }
   logUser(user:any) {
-    this.id=user.id;
     this.login=user.login;
+    this.id=user.id;
+    this.token=user.token;
     this.authorise=true;
+    this.tokenService.setToken(user.token);
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-mainpage',
@@ -8,4 +8,10 @@ import {Component, Input} from '@angular/core';
 export class MainpageComponent {
     @Input() id!:number;
     @Input() Login!:String;
+    url:string="/labs/";
+    @Output() Authorise=new EventEmitter();
+    ngOnInit(){
+      console.log(this.id);
+      this.url+=this.id;
+    }
 }

@@ -1,1 +1,15 @@
+.content{
+  height: 100%;
+  display: block;
+  justify-content: center;
+}
 
+.content p {
+  font-size: 4em;
+  padding-left: 30%;
+  padding-right: 20%;
+}
+.content p mat-icon {
+  height: 100%;
+
+}

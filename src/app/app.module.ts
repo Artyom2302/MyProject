@@ -11,8 +11,8 @@ import { IonicModule } from '@ionic/angular';
 import {A11yModule} from '@angular/cdk/a11y';
 import { AuthoriseComponent } from './Components/authorise/authorise.component';
 import { AboutComponent } from './Components/about/about.component';
-import {Routes, RouterModule} from '@angular/router';
-import {HttpClientModule} from "@angular/common/http";
+import {Routes, RouterModule, ActivatedRoute} from '@angular/router';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { LabsComponent } from './Components/labs/labs.component';
 import { LabComponent } from './Components/labs/lab/lab.component';
 import { MainpageComponent } from './Components/mainpage/mainpage.component';
@@ -29,11 +29,13 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
+import {HTTPInterceptorService} from "../services/httpinterceptor.service";
 
 const appRoutes: Routes =[
+  {path:'',component:AboutComponent},
   { path: 'login', component: AuthoriseComponent},
   { path: 'about', component: AboutComponent},
-  {path: 'labs',component:LabsComponent}
+  {path: 'labs/:id',component:LabsComponent}
 ];
 
 @NgModule({
@@ -61,6 +63,11 @@ const appRoutes: Routes =[
     BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, HttpClientModule, MatCardModule, MatButtonModule, MatCheckboxModule, MatRippleModule, MatSlideToggleModule, MatTableModule, MatSelectModule, MatListModule]
   ,
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:HTTPInterceptorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

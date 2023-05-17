@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {lastValueFrom} from "rxjs";
 import {URL_USER} from "../app/common/url";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 
@@ -13,15 +14,12 @@ import {URL_USER} from "../app/common/url";
 })
 export class AuthoriseService {
 
-  constructor(private http :HttpClient) { }
+  constructor(private http :HttpClient,private _snackBar: MatSnackBar) { }
 
   async Authorise(login:string, password:string):Promise<any> {
-    let response = await lastValueFrom(this.http.get<any>(URL_USER+"/ShowUserByLogin?login="+login)).catch((_:any) => null);
+    let response = await lastValueFrom(this.http.get<any>(URL_USER+"/Authorise?login="+login+"&password="+password)).catch((_:any) => null);
     if (response==null){
       return -1;
-    }
-    else if(response.password!=password){
-      return 0;
     }
     else{
       return response;
@@ -31,14 +29,19 @@ export class AuthoriseService {
 
 
   async Register(login:string,password:string) {
-    console.log(login);
-    console.log(password);
-    console.log(URL_USER);
+    // console.log(login);
+    // console.log(password);
+    // console.log(URL_USER);
 
     let resp =  await lastValueFrom( this.http.post(URL_USER, {
       "login": login,
       "password": password
-    })).then(r=>console.log(r));
+    })).catch(
+      r=>{
+        this._snackBar.open('User exist', 'Close', {duration: 3000,verticalPosition: 'top'});
+      }
+
+    ).then(r=>console.log(r));
 
   }
    async AddUserLab(userId:number,labName:string,mainStack:string){

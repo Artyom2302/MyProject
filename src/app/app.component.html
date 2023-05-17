@@ -1,8 +1,11 @@
 <body>
-      <div class="unauthorized" *ngIf="!authorise">
+      <div class="unauthorized" *ngIf="!authorise else elseTemp">
         <app-authorise (loginUser)="logUser($event)"></app-authorise>
       </div>
-      <app-mainpage [Login]="login" [id]="id" *ngIf="authorise"></app-mainpage>
+      <ng-template #elseTemp>
+        <app-mainpage [Login]="login" [id]="id"></app-mainpage>
+      </ng-template>
+
 </body>
 
 
