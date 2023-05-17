@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Creating lab</h1>
+  <mat-dialog-content>
+  <p>
+  <mat-form-field [formGroup]="AddForm">
+    <input matInput placeholder="Lab Name" formControlName="labName">
+  </mat-form-field>
+  </p>
+  <p>
+
+    <mat-form-field [formGroup]="AddForm">
+      <textarea matInput placeholder="Name of main stack" formControlName="mainStack"></textarea>
+    </mat-form-field>
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <p><button mat-button color="basic" (click)="OnAdd()">Create lab</button></p>
+</mat-dialog-actions>
+

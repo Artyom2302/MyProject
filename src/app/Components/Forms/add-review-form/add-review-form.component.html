@@ -1,0 +1,18 @@
+
+<h1 mat-dialog-title>Review</h1>
+<mat-dialog-content>
+  <p>
+    <mat-form-field [formGroup]="AddReviewForm">
+      <input matInput placeholder="Review text" formControlName="text">
+    </mat-form-field>
+  </p>
+  <p>
+
+    <mat-form-field [formGroup]="AddReviewForm">
+      <textarea matInput placeholder="Score" formControlName="score"></textarea>
+    </mat-form-field>
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <p><button mat-button color="basic" (click)="OnAdd()">Create lab</button></p>
+</mat-dialog-actions>

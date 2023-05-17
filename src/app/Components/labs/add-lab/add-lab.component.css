@@ -1,0 +1,46 @@
+.add{
+  border-radius: 20px;
+  border: solid;
+  text-align: center;
+  height: 100%;
+  width: 300px;
+}
+.add-table{
+  border-radius: 20px;
+  border: solid;
+  text-align: center;
+  height: 50px;
+  width: 100%;
+}
+.add-container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.add-container h1{
+  text-align: center;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.example-ripple-container {
+  cursor: pointer;
+
+  background-image:url("src/app/img/++.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  width:100%;
+  height:  100%;
+  line-height: 300px;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
